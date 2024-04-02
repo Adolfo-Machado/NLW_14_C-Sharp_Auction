@@ -9,11 +9,9 @@ namespace RocketseatAuction.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(Auction), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GetCurrentAuction()
+        public IActionResult GetCurrentAuction([FromServices] GetCurrentAuctionUseCase useCase)
         {
-            var useCase = new GetCurrentAuctionUseCase();
-
-            var result = useCase.GetCurrent();
+            var result = useCase.ExecuteCurrent();
 
             if (result is null)
             {
@@ -26,11 +24,9 @@ namespace RocketseatAuction.API.Controllers
         [HttpGet("ALL")]
         [ProducesResponseType(typeof(Auction), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GetAuction()
+        public IActionResult GetAuction([FromServices] GetCurrentAuctionUseCase useCase)
         {
-            var useCase = new GetCurrentAuctionUseCase();
-
-            var result = useCase.GetAll();
+            var result = useCase.ExecuteAll();
 
             return Ok(result);
         }
